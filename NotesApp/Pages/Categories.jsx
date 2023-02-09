@@ -6,23 +6,18 @@ import { SharedArraysContext } from './Context';
 export default function Categories(props) {
 
   const { categories, setCategories, notes, setNotes } = useContext(SharedArraysContext);
-
   const [modalVisible, setModalVisible] = useState(false);
   const [inputValue, setInputValue] = useState('');
-
 
   const addNote = (id) => {
     setNotes(prevNotes => {
       let newNotes = { ...prevNotes };
       if (!newNotes[id]) {
         newNotes[id] = [];
-
       }
       return newNotes;
     });
   };
-
-
 
   return (
     <SafeAreaView>
@@ -72,12 +67,9 @@ export default function Categories(props) {
                 value={inputValue}
               />
 
-
-
               <View style={{ alignSelf: 'center', flexDirection: 'row', padding: 16, marginTop: 40 }}>
                 <Button title='Add'
-                  disabled={inputValue === ''}
-                  
+                  disabled={inputValue === ''}  
                   buttonStyle={{
                     marginRight:20,backgroundColor: 'rgba(199, 43, 98, 1)'
                   }}
@@ -90,20 +82,16 @@ export default function Categories(props) {
                     setInputValue('');
                     setModalVisible(!modalVisible);
                   }}>
-
                 </Button>
+
                 <Button title='cancel'
                   buttonStyle={{
                     backgroundColor: 'lightgrey'
-
                   }}
                   titleStyle={{ fontWeight: '700' }}
                   onPress={() => setModalVisible('false')}>
-
                 </Button>
               </View>
-
-
             </View>
           </View>
         </Modal>
@@ -114,7 +102,6 @@ export default function Categories(props) {
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => props.navigation.navigate('Notes', { categoryId: item.id, categoryName: item.name })}>
-
             <Card>
               <Card.Title style={{
                 fontSize: '20%',
@@ -128,8 +115,6 @@ export default function Categories(props) {
           </TouchableOpacity>
         )}
       />
-
-
     </SafeAreaView>
   )
 }

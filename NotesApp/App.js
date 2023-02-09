@@ -1,6 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
 import Categories from './Pages/Categories';
 import NotesPerCategory from './Pages/NotesPerCategory';
 import { NavigationContainer } from '@react-navigation/native';
