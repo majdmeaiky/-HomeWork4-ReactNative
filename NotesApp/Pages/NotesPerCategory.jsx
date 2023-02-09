@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image,FlatList } from 'react-native'
 import React, { useContext, useState } from 'react'
-import { Button, Card, FAB } from 'react-native-elements';
+import { Button, Card, FAB, Icon } from 'react-native-elements';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SharedArraysContext } from './Context';
 import * as ImagePicker from 'expo-image-picker';
@@ -51,6 +51,13 @@ export default function NotesPerCategory(props) {
         });
         console.log(notes);
     };
+
+    const deleteNote=(id)=>{
+        console.log(id);
+        setNotes({
+            ...notes,
+            [categoryId]: notes[categoryId].filter(item => item.noteId !== id),
+        });    }
     return (
         <SafeAreaView >
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 16, position: 'absolute', top: 10, left: 19, right: 5, }}>
@@ -120,20 +127,29 @@ export default function NotesPerCategory(props) {
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item }) => (
                     <TouchableOpacity>
-                        <Card>
+                        <Card >
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
                             <Card.Title style={{
                                 fontSize: '15%',
                                 fontWeight: 'bold', color: 'rgba(199, 43, 98, 1)', alignSelf: 'left', fontSize: 25
+                                
                             }}>
                                 {item.title}
                             </Card.Title>
+                            <Icon
+                            onPress={()=>{deleteNote(item.noteId)}}
+        name='delete'
+        color='black' />
+        </View>
                             <Card.Title style={{
                                 fontSize: '15%',
                                 fontWeight: 'bold', color: 'rgba(199, 43, 98, 1)', alignSelf: 'left'
                             }}>
-                                {item.dateAndTime} </Card.Title>
+                                {item.dateAndTime} </Card.Title> 
+                              
+    
                             <Card.Divider />
-
+                           
                             <Text style={{
                                 borderRadius: '10%',
                                 alignSelf: 'flex-start',
